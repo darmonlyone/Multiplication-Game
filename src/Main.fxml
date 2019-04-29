@@ -12,22 +12,22 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/Main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
       <GridPane layoutX="-6.0" layoutY="68.0" prefHeight="738.0" prefWidth="1136.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="574.0" minWidth="10.0" prefWidth="307.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="831.0" minWidth="0.0" prefWidth="824.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="574.0" minWidth="10.0" prefWidth="307.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="831.0" minWidth="0.0" prefWidth="824.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <ScrollPane prefHeight="838.0" prefWidth="264.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1330.0" prefWidth="285.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1330.0" prefWidth="285.0">
                      <children>
-                        <FlowPane prefHeight="726.0" prefWidth="345.0">
+                        <FlowPane prefHeight="1320.0" prefWidth="285.0">
                            <children>
                               <Pane prefHeight="120.0" prefWidth="289.0" style="-fx-border-color: #E8E8E8;">
                                  <children>
@@ -41,9 +41,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table2_btn" layoutX="198.0" layoutY="47.0" mnemonicParsing="false" text="PLAY" textFill="WHITE">
+                                    <Button fx:id="table2_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playTwo" text="PLAY" textFill="WHITE">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -60,9 +60,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table3_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="WHITE">
+                                    <Button fx:id="table3_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playThree" text="PLAY" textFill="WHITE">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -79,9 +79,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table4_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="WHITE">
+                                    <Button fx:id="table4_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playFour" text="PLAY" textFill="WHITE">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -98,9 +98,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table5_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table5_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playFive" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -117,9 +117,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table6_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table6_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playSix" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -136,9 +136,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table7_btn" layoutX="196.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table7_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playSeven" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -155,9 +155,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table8_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table8_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playEigth" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -174,9 +174,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table9_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table9_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playNine" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -193,9 +193,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table10_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table10_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playTen" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -212,9 +212,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table11_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table11_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playEleven" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -231,9 +231,9 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="table12_btn" layoutX="198.0" layoutY="46.0" mnemonicParsing="false" text="PLAY" textFill="#fcfafa">
+                                    <Button fx:id="table12_btn" layoutX="184.0" layoutY="41.0" mnemonicParsing="false" onAction="#playTwelve" text="PLAY" textFill="#fcfafa">
                                        <font>
-                                          <Font name="Avenir Heavy" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -242,9 +242,9 @@
                         </FlowPane>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </ScrollPane>
-            <FlowPane fx:id="welcome_pane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <FlowPane fx:id="welcome_pane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
                <children>
                   <Pane prefHeight="738.0" prefWidth="821.0">
                      <children>
@@ -281,16 +281,16 @@
                <children>
                   <Pane fx:id="question_box" prefHeight="194.0" prefWidth="817.0">
                      <children>
-                        <Label fx:id="question_text" layoutX="294.0" layoutY="62.0" text="2 x 2 = ?" textAlignment="CENTER">
+                        <Label fx:id="question_text" layoutX="276.0" layoutY="48.0" text="2 x 2 = ?" textAlignment="CENTER">
                            <font>
-                              <Font name="Avenir Heavy" size="56.0" />
+                              <Font name="System Bold" size="65.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
                   <Pane prefHeight="93.0" prefWidth="819.0" style="-fx-background-color: #99d6ff;">
                      <children>
-                        <Label fx:id="current_time" layoutX="662.0" layoutY="24.0" text="Time: 60" textFill="#233966c4">
+                        <Label fx:id="current_time" layoutX="637.0" layoutY="24.0" text="Time: 60 sec" textFill="#233966c4">
                            <font>
                               <Font name="Avenir Heavy" size="31.0" />
                            </font>
@@ -302,33 +302,38 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane prefHeight="447.0" prefWidth="819.0" style="-fx-background-color: white; -fx-border-color: #E8E8E8;">
+                  <Pane prefHeight="447.0" prefWidth="819.0" style="-fx-background-color: #F0F0F0; -fx-border-color: #E8E8E8;">
                      <children>
-                        <Button fx:id="answer1" layoutX="235.0" layoutY="102.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="165.0" text="Answer 1" textAlignment="CENTER" textFill="#f8f6f6">
+                        <Button fx:id="answer1" layoutX="177.0" layoutY="102.0" mnemonicParsing="false" onAction="#asnwerOne" prefHeight="99.0" prefWidth="165.0" text="1000" textAlignment="CENTER" textFill="#f8f6f6">
                            <font>
-                              <Font name="Avenir Heavy" size="28.0" />
+                              <Font name="System Bold" size="45.0" />
                            </font>
                         </Button>
-                        <Button fx:id="answer3" layoutX="235.0" layoutY="224.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="165.0" text="Answer 3" textAlignment="CENTER" textFill="#f8f6f6">
+                        <Button fx:id="answer3" layoutX="177.0" layoutY="247.0" mnemonicParsing="false" onAction="#answerThree" prefHeight="99.0" prefWidth="165.0" text="Answer 3" textAlignment="CENTER" textFill="#f8f6f6">
                            <font>
-                              <Font name="Avenir Heavy" size="28.0" />
+                              <Font name="System Bold" size="45.0" />
                            </font>
                         </Button>
-                        <Button fx:id="answer2" layoutX="420.0" layoutY="102.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="165.0" text="Answer 2" textAlignment="CENTER" textFill="#f8f6f6">
+                        <Button fx:id="answer2" layoutX="478.0" layoutY="102.0" mnemonicParsing="false" onAction="#answerTwo" prefHeight="99.0" prefWidth="165.0" text="Answer 2" textAlignment="CENTER" textFill="#f8f6f6">
                            <font>
-                              <Font name="Avenir Heavy" size="28.0" />
+                              <Font name="System Bold" size="45.0" />
                            </font>
                         </Button>
-                        <Button fx:id="answer4" layoutX="420.0" layoutY="224.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="165.0" text="Answer 4" textAlignment="CENTER" textFill="#f8f6f6">
+                        <Button fx:id="answer4" layoutX="478.0" layoutY="247.0" mnemonicParsing="false" onAction="#answerFour" prefHeight="99.0" prefWidth="165.0" text="Answer 4" textAlignment="CENTER" textFill="#f8f6f6">
                            <font>
-                              <Font name="Avenir Heavy" size="28.0" />
+                              <Font name="System Bold" size="45.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="giveup" layoutX="724.0" layoutY="406.0" mnemonicParsing="false" onAction="#giveUp" prefHeight="27.0" prefWidth="81.0" text="Give Up" textAlignment="CENTER" textFill="#f8f6f6">
+                           <font>
+                              <Font size="11.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
                </children>
             </FlowPane>
-            <FlowPane fx:id="result_pane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
+            <FlowPane fx:id="result_pane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Pane prefHeight="740.0" prefWidth="820.0">
                      <children>
@@ -347,12 +352,12 @@
                               <Font name="Avenir Light" size="36.0" />
                            </font>
                         </Label>
-                        <Button fx:id="newgame_btn" layoutX="188.0" layoutY="518.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="153.0" text="New game" textFill="WHITE">
+                        <Button fx:id="newgame_btn" layoutX="188.0" layoutY="518.0" mnemonicParsing="false" onAction="#newGame" prefHeight="59.0" prefWidth="153.0" text="New game" textFill="WHITE">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Button>
-                        <Button fx:id="tryagain_btn" layoutX="476.0" layoutY="518.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="153.0" text="Try again" textFill="WHITE">
+                        <Button fx:id="tryagain_btn" layoutX="476.0" layoutY="518.0" mnemonicParsing="false" onAction="#tryAgain" prefHeight="59.0" prefWidth="153.0" text="Try again" textFill="WHITE">
                            <font>
                               <Font size="21.0" />
                            </font>
@@ -363,7 +368,7 @@
             </FlowPane>
          </children>
       </GridPane>
-      <AnchorPane prefHeight="69.0" prefWidth="1124.0" style="-fx-background-color: #99d6ff;">
+      <AnchorPane prefHeight="69.0" prefWidth="1124.0" style="-fx-background-color: SkyBlue;">
          <children>
             <Label layoutX="30.0" layoutY="20.0" text="Multiplication  Game">
                <font>
