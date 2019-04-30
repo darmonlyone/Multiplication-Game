@@ -1,9 +1,13 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -124,13 +128,32 @@ public class GameController {
     @FXML
     private Button tryagain_btn;
 
+
+    @FXML
+    private Label readyCount;
+
+    @FXML
+    private Label goLabel;
+
+    @FXML
+    private Pane ready_pane;
+
+    @FXML
+    private Label readyLabel;
+
+    @FXML
+    private Label fail_mark;
+
     private int playScore;
     private int playNumber;
     private Random random;
     private int answered;
     private ArrayList<Integer> ansList;
     private int MAXMULTI = 12;
-
+    private Timeline timeline;
+    private Timeline countDown;
+    private int playTime;
+    private int failCount = 3;
     @FXML
     private void initialize(){
         changeScreen(1);
@@ -145,16 +168,25 @@ public class GameController {
             welcome_pane.setVisible(true);
             gameplay_pane.setVisible(false);
             result_pane.setVisible(false);
+            ready_pane.setVisible(false);
         } else if (paneNo == 2) {
             // 2: game play
             welcome_pane.setVisible(false);
             gameplay_pane.setVisible(true);
             result_pane.setVisible(false);
+            ready_pane.setVisible(false);
         } else if (paneNo == 3) {
             // 3: result
             welcome_pane.setVisible(false);
             gameplay_pane.setVisible(false);
             result_pane.setVisible(true);
+            ready_pane.setVisible(false);
+        } else if (paneNo == 4){
+            // 4: ready
+            welcome_pane.setVisible(false);
+            gameplay_pane.setVisible(false);
+            result_pane.setVisible(false);
+            ready_pane.setVisible(true);
         }
     }
 
@@ -166,10 +198,65 @@ public class GameController {
         return playNumber * multiplier;
     }
 
+    private void startTimer() {
+        playTime = 10;
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), e ->updatePlayTime()),
+                new KeyFrame(Duration.seconds(1)));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    private void updatePlayTime(){
+        current_time.setText("Time: "+ playTime-- + "sec");
+        if (playTime == -1){
+            changeScreen(4);
+            goLabel.setText("Time Out!");
+        }
+        if (playTime == -4){
+            changeScreen(3);
+            setResult();
+            stopTimer();
+        }
+    }
+
+    private void stopTimer(){
+        timeline.stop();
+    }
+
+    private void readyStep(int playNumber){
+        failCount = 3;
+        disablePlay(true);
+        changeScreen(4);
+        readyLabel.setVisible(true);
+        readyCount.setVisible(true);
+        goLabel.setVisible(false);
+        readyCount.setText("4");
+        goLabel.setText("Start");
+        countDown = new Timeline(
+                new KeyFrame(Duration.seconds(0), e ->readyCountDown(playNumber)),
+                new KeyFrame(Duration.seconds(1)));
+        countDown.setCycleCount(Animation.INDEFINITE);
+        countDown.play();
+    }
+
+    private void readyCountDown(int playNumber){
+        int countdown = Integer.parseInt(readyCount.getText());
+        readyCount.setText(Integer.toString(--countdown));
+        if (countdown == 0){
+            goLabel.setVisible(true);
+            readyCount.setVisible(false);
+            readyLabel.setVisible(false);
+        }
+        if (countdown == -1){
+            changeScreen(2);
+            startPlay(playNumber);
+            countDown.stop();
+            startTimer();
+        }
+    }
 
     private void startPlay(int playNumber){
-        disablePlay(true);
-        changeScreen(2);
         this.playNumber = playNumber;
         answered = makeQuestion();
         while (ansList.contains(answered)){
@@ -184,7 +271,7 @@ public class GameController {
             int randAns = random.nextInt(playNumber*20)+1;
             if (playNumber % 2 == 0 && randAns % 2 != 0)
                 randAns += 1;
-            while (randAnsList.contains(randAns)){
+            while (randAnsList.contains(randAns) || randAns == answered){
                 randAns = random.nextInt(playNumber*20)+1;
                 if (playNumber % 2 == 0 && randAns % 2 != 0)
                     randAns += 1;
@@ -195,6 +282,20 @@ public class GameController {
             }else {
                 setSelectAnswer(i,randAns);
             }
+        }
+    }
+
+    private void updateFail(){
+        failCount--;
+        if (failCount == 2){
+            fail_mark.setText("X X");
+        }else if(failCount == 1){
+            fail_mark.setText("X");
+        }else if (failCount <= 0){
+            fail_mark.setText("X X X");
+            changeScreen(3);
+            setResult();
+            stopTimer();
         }
     }
 
@@ -243,7 +344,7 @@ public class GameController {
         if (answer4.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
-
+            updateFail();
         }
         startPlay(playNumber);
     }
@@ -253,7 +354,7 @@ public class GameController {
         if (answer3.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
-
+            updateFail();
         }
         startPlay(playNumber);
     }
@@ -263,7 +364,7 @@ public class GameController {
         if (answer2.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
-
+            updateFail();
         }
         startPlay(playNumber);
     }
@@ -273,7 +374,7 @@ public class GameController {
         if (answer1.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
-
+            updateFail();
         }
         startPlay(playNumber);
     }
@@ -281,6 +382,7 @@ public class GameController {
     @FXML
     void giveUp(ActionEvent event) {
         changeScreen(3);
+        stopTimer();
         setResult();
     }
 
@@ -293,73 +395,73 @@ public class GameController {
     @FXML
     void playEigth(ActionEvent event) {
         resetGamePlay();
-        startPlay(8);
+        readyStep(8);
     }
 
     @FXML
     void playEleven(ActionEvent event) {
         resetGamePlay();
-        startPlay(11);
+        readyStep(11);
     }
 
     @FXML
     void playFive(ActionEvent event) {
         resetGamePlay();
-        startPlay(5);
+        readyStep(5);
     }
 
     @FXML
     void playFour(ActionEvent event) {
         resetGamePlay();
-        startPlay(4);
+        readyStep(4);
     }
 
     @FXML
     void playNine(ActionEvent event) {
         resetGamePlay();
-        startPlay(9);
+        readyStep(9);
     }
 
     @FXML
     void playSeven(ActionEvent event) {
         resetGamePlay();
-        startPlay(7);
+        readyStep(7);
     }
 
     @FXML
     void playSix(ActionEvent event) {
         resetGamePlay();
-        startPlay(6);
+        readyStep(6);
     }
 
     @FXML
     void playTen(ActionEvent event) {
         resetGamePlay();
-        startPlay(10);
+        readyStep(10);
     }
 
     @FXML
     void playThree(ActionEvent event) {
         resetGamePlay();
-        startPlay(3);
+        readyStep(3);
     }
 
     @FXML
     void playTwelve(ActionEvent event) {
         resetGamePlay();
-        startPlay(12);
+        readyStep(12);
     }
 
     @FXML
     void playTwo(ActionEvent event) {
         resetGamePlay();
-        startPlay(2);
+        readyStep(2);
     }
 
     @FXML
     void tryAgain(ActionEvent event) {
         resetGamePlay();
-        startPlay(playNumber);
+        readyStep(playNumber);
     }
 
 }
