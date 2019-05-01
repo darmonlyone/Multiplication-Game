@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -120,6 +121,9 @@ public class GameController {
     private Label result_score;
 
     @FXML
+    private Label result_highscore;
+
+    @FXML
     private Label table_play;
 
     @FXML
@@ -127,7 +131,6 @@ public class GameController {
 
     @FXML
     private Button tryagain_btn;
-
 
     @FXML
     private Label readyCount;
@@ -146,6 +149,7 @@ public class GameController {
 
     private int playScore;
     private int playNumber;
+    private int playHighScore;
     private Random random;
     private int answered;
     private ArrayList<Integer> ansList;
@@ -156,6 +160,7 @@ public class GameController {
     private int failCount = 3;
     private ArrayList<Double> questionTimePlay;
     private TimeStop timeStop;
+    private Score score = new Score();
 
     @FXML
     private void initialize(){
@@ -165,6 +170,7 @@ public class GameController {
         ansList = new ArrayList<>();
         timeStop = new TimeStop();
         questionTimePlay = new ArrayList<>();
+        showHighScore();
     }
 
     private void changeScreen(int paneNo){
@@ -204,7 +210,7 @@ public class GameController {
     }
 
     private void startTimer() {
-        playTime = 10;
+        playTime = 60;
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e ->updatePlayTime()),
                 new KeyFrame(Duration.seconds(1)));
@@ -340,12 +346,56 @@ public class GameController {
     private void setResult(){
         table_play.setText("Table "+ playNumber);
         result_score.setText("Score: " + playScore);
+        if(setHighScore()){
+            result_highscore.setText("High Score: " + playScore);
+        }
+        result_highscore.setText("High Score: " + playHighScore);
+    }
+
+    private void showHighScore(){
+        try {
+            score.readScore("src/highscore.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] highscore = score.getHighScoreList();
+        table2_score.setText("High Score: "+ highscore[0]);
+        table3_score.setText("High Score: "+ highscore[1]);
+        table4_score.setText("High Score: "+ highscore[2]);
+        table5_score.setText("High Score: "+ highscore[3]);
+        table6_score.setText("High Score: "+ highscore[4]);
+        table7_score.setText("High Score: "+ highscore[5]);
+        table8_score.setText("High Score: "+ highscore[6]);
+        table9_score.setText("High Score: "+ highscore[7]);
+        table10_score.setText("High Score: "+ highscore[8]);
+        table11_score.setText("High Score: "+ highscore[9]);
+        table12_score.setText("High Score: "+ highscore[10]);
+    }
+
+    private void saveHighScore(){
+        try {
+            score.writeScore("src/highscore.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private boolean setHighScore(){
+        playHighScore = Integer.parseInt(score.getHighScore(playNumber));
+        if (playScore > playHighScore){
+            score.setHighScore(playNumber-2,playScore);
+            return true;
+        }
+        return false;
     }
 
     private void endGame(){
         changeScreen(3);
         stopTimer();
         setResult();
+        saveHighScore();
+        showHighScore();
         timeStop.stopTiming();
     }
 
