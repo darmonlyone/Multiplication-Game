@@ -144,6 +144,9 @@ public class GameController {
     @FXML
     private Label fail_mark;
 
+    @FXML
+    private FlowPane result_table;
+
     private int playScore;
     private int playNumber;
     private Random random;
@@ -154,9 +157,9 @@ public class GameController {
     private Timeline countDown;
     private int playTime;
     private int failCount = 3;
-    private ArrayList<Double> questionTimePlay;
+    private ArrayList<ResultFlowPane> resultFlowPaneArrayList;
     private TimeStop timeStop;
-
+    private int multiplier;
     @FXML
     private void initialize(){
         changeScreen(1);
@@ -164,7 +167,7 @@ public class GameController {
         random = new Random();
         ansList = new ArrayList<>();
         timeStop = new TimeStop();
-        questionTimePlay = new ArrayList<>();
+        resultFlowPaneArrayList = new ArrayList<>();
     }
 
     private void changeScreen(int paneNo){
@@ -196,15 +199,20 @@ public class GameController {
     }
 
     private int makeQuestion(){
-        int multiplier = random.nextInt(MAXMULTI) + 1;
-        if (ansList.size() >= MAXMULTI)
+        int multiplier;
+        if (ansList.size() >= (MAXMULTI * 2))
+            multiplier = random.nextInt(MAXMULTI) + (MAXMULTI*2) + 1;
+        else if (ansList.size() >= MAXMULTI)
             multiplier = random.nextInt(MAXMULTI) + MAXMULTI + 1;
+        else
+            multiplier = random.nextInt(MAXMULTI) + 1;
         question_text.setText(String.format("%d x %d = ??",playNumber,multiplier));
+        this.multiplier =  multiplier;
         return playNumber * multiplier;
     }
 
     private void startTimer() {
-        playTime = 10;
+        playTime = 60;
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e ->updatePlayTime()),
                 new KeyFrame(Duration.seconds(1)));
@@ -263,7 +271,7 @@ public class GameController {
         this.playNumber = playNumber;
         answered = makeQuestion();
         while (ansList.contains(answered)){
-            if (ansList.size() >= MAXMULTI*2)
+            if (ansList.size() >= MAXMULTI*3)
                 ansList.clear();
             answered = makeQuestion();
         }
@@ -271,11 +279,11 @@ public class GameController {
         int randAnsPoint = random.nextInt(4);
         ArrayList<Integer> randAnsList = new ArrayList<>();
         for (int i = 0; i < 4 ; i++) {
-            int randAns = random.nextInt(playNumber*20)+1;
+            int randAns = random.nextInt(playNumber*(multiplier >= MAXMULTI*2 ? MAXMULTI*3 : multiplier > MAXMULTI ? MAXMULTI*2 : MAXMULTI ))+1;
             if (playNumber % 2 == 0 && randAns % 2 != 0)
                 randAns += 1;
             while (randAnsList.contains(randAns) || randAns == answered){
-                randAns = random.nextInt(playNumber*20)+1;
+                randAns = random.nextInt(playNumber*(multiplier >= MAXMULTI*2 ? MAXMULTI*3 : multiplier > MAXMULTI ? MAXMULTI*2 : MAXMULTI ))+1;
                 if (playNumber % 2 == 0 && randAns % 2 != 0)
                     randAns += 1;
             }
@@ -320,7 +328,7 @@ public class GameController {
         current_score.setText("Score: 0");
         playScore = 0;
         ansList.clear();
-        questionTimePlay.clear();
+        resultFlowPaneArrayList.clear();
     }
 
     private void disablePlay(boolean bool){
@@ -347,55 +355,57 @@ public class GameController {
         stopTimer();
         setResult();
         timeStop.stopTiming();
+        result_table.getChildren().clear();
+        result_table.getChildren().addAll(resultFlowPaneArrayList);
     }
 
-    private void updateTimeStop(){
+    private void updateResultTable(int multiplier, int question){
         timeStop.stopTiming();
-        questionTimePlay.add(timeStop.getUsedTime());
-        System.out.println(timeStop.getUsedTime());
+        resultFlowPaneArrayList.add(new ResultFlowPane(resultFlowPaneArrayList.size()+1,playNumber,multiplier,question,timeStop.getUsedTime()));
     }
+
 
     @FXML
     void answerFour(ActionEvent event) {
+        updateResultTable(multiplier,Integer.parseInt(answer4.getText()));
         if (answer4.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
             updateFail();
         }
-        updateTimeStop();
         startPlay(playNumber);
     }
 
     @FXML
     void answerThree(ActionEvent event) {
+        updateResultTable(multiplier,Integer.parseInt(answer3.getText()));
         if (answer3.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
             updateFail();
         }
-        updateTimeStop();
         startPlay(playNumber);
     }
 
     @FXML
     void answerTwo(ActionEvent event) {
+        updateResultTable(multiplier,Integer.parseInt(answer2.getText()));
         if (answer2.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
             updateFail();
         }
-        updateTimeStop();
         startPlay(playNumber);
     }
 
     @FXML
     void asnwerOne(ActionEvent event) {
+        updateResultTable(multiplier,Integer.parseInt(answer1.getText()));
         if (answer1.getText().equals(Integer.toString(answered))){
             updateScore(++playScore);
         }else {
             updateFail();
         }
-        updateTimeStop();
         startPlay(playNumber);
     }
 

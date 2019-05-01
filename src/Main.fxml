@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/Main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
       <GridPane layoutX="-6.0" layoutY="68.0" prefHeight="738.0" prefWidth="1136.0">
          <columnConstraints>
@@ -282,7 +282,7 @@
                   </Pane>
                </children>
             </FlowPane>
-            <FlowPane fx:id="ready_pane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
+            <FlowPane fx:id="ready_pane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Pane fx:id="ready_pane" prefHeight="739.0" prefWidth="820.0" style="-fx-background-color: #f28d8d;">
                      <children>
@@ -400,50 +400,47 @@
                               <Font name="Avenir Light" size="25.0" />
                            </font>
                         </Label>
-                        <ScrollPane layoutX="165.0" layoutY="370.0" prefHeight="200.0" prefWidth="503.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="481.0" style="-fx-background-color: white;">
+                        <ScrollPane hbarPolicy="NEVER" layoutX="165.0" layoutY="370.0" prefHeight="200.0" prefWidth="503.0">
+                           <content>
+                              <FlowPane fx:id="result_table" prefHeight="200.0" prefWidth="485.0" style="-fx-background-color: white;">
                                  <children>
-                                    <FlowPane prefHeight="200.0" prefWidth="485.0">
+                                    <Pane prefHeight="56.0" prefWidth="484.0">
                                        <children>
-                                          <Pane prefHeight="56.0" prefWidth="485.0">
-                                             <children>
-                                                <Label layoutX="39.0" layoutY="20.0" text="Question 1">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="121.0" layoutY="20.0" prefHeight="17.0" prefWidth="55.0" text="2 x 10">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="203.0" layoutY="20.0" text="Answer: ">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="328.0" layoutY="20.0" text="Time:">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="378.0" layoutY="20.0" prefHeight="17.0" prefWidth="73.0" text="1 sec">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="265.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="20">
-                                                   <font>
-                                                      <Font name="Avenir Medium" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
+                                          <Label layoutX="35.0" layoutY="20.0" prefHeight="17.0" prefWidth="80.0" text="Question 1">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="130.0" layoutY="20.0" prefHeight="20.0" prefWidth="71.0" text="2 x 10">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="212.0" layoutY="20.0" prefWidth="53.0" text="Answer: ">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="337.0" layoutY="20.0" prefWidth="34.0" text="Time:">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="387.0" layoutY="20.0" prefHeight="17.0" prefWidth="73.0" text="1 sec">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="274.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="20">
+                                             <font>
+                                                <Font name="Avenir Medium" size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children>
-                                    </FlowPane>
-                                 </children></AnchorPane>
-                          </content>
+                                    </Pane>
+                                 </children>
+                              </FlowPane>
+                           </content>
                         </ScrollPane>
                      </children>
                   </Pane>
