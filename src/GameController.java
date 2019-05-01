@@ -154,12 +154,17 @@ public class GameController {
     private Timeline countDown;
     private int playTime;
     private int failCount = 3;
+    private ArrayList<Double> questionTimePlay;
+    private TimeStop timeStop;
+
     @FXML
     private void initialize(){
         changeScreen(1);
         playNumber = 1;
         random = new Random();
         ansList = new ArrayList<>();
+        timeStop = new TimeStop();
+        questionTimePlay = new ArrayList<>();
     }
 
     private void changeScreen(int paneNo){
@@ -214,9 +219,7 @@ public class GameController {
             goLabel.setText("Time Out!");
         }
         if (playTime == -4){
-            changeScreen(3);
-            setResult();
-            stopTimer();
+            endGame();
         }
     }
 
@@ -283,6 +286,7 @@ public class GameController {
                 setSelectAnswer(i,randAns);
             }
         }
+        timeStop.startTiming();
     }
 
     private void updateFail(){
@@ -293,9 +297,7 @@ public class GameController {
             fail_mark.setText("X");
         }else if (failCount <= 0){
             fail_mark.setText("X X X");
-            changeScreen(3);
-            setResult();
-            stopTimer();
+            endGame();
         }
     }
 
@@ -318,6 +320,7 @@ public class GameController {
         current_score.setText("Score: 0");
         playScore = 0;
         ansList.clear();
+        questionTimePlay.clear();
     }
 
     private void disablePlay(boolean bool){
@@ -339,6 +342,19 @@ public class GameController {
         result_score.setText("Score: " + playScore);
     }
 
+    private void endGame(){
+        changeScreen(3);
+        stopTimer();
+        setResult();
+        timeStop.stopTiming();
+    }
+
+    private void updateTimeStop(){
+        timeStop.stopTiming();
+        questionTimePlay.add(timeStop.getUsedTime());
+        System.out.println(timeStop.getUsedTime());
+    }
+
     @FXML
     void answerFour(ActionEvent event) {
         if (answer4.getText().equals(Integer.toString(answered))){
@@ -346,6 +362,7 @@ public class GameController {
         }else {
             updateFail();
         }
+        updateTimeStop();
         startPlay(playNumber);
     }
 
@@ -356,6 +373,7 @@ public class GameController {
         }else {
             updateFail();
         }
+        updateTimeStop();
         startPlay(playNumber);
     }
 
@@ -366,6 +384,7 @@ public class GameController {
         }else {
             updateFail();
         }
+        updateTimeStop();
         startPlay(playNumber);
     }
 
@@ -376,14 +395,13 @@ public class GameController {
         }else {
             updateFail();
         }
+        updateTimeStop();
         startPlay(playNumber);
     }
 
     @FXML
     void giveUp(ActionEvent event) {
-        changeScreen(3);
-        stopTimer();
-        setResult();
+        endGame();
     }
 
     @FXML
