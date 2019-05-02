@@ -291,12 +291,12 @@
                               <Font name="Avenir Heavy" size="69.0" />
                            </font>
                         </Label>
-                        <Label fx:id="readyCount" layoutX="384.0" layoutY="348.0" text="4" textAlignment="CENTER">
+                        <Label fx:id="readyCountLabel" layoutX="384.0" layoutY="348.0" text="4" textAlignment="CENTER">
                            <font>
                               <Font name="Avenir Heavy" size="69.0" />
                            </font>
                         </Label>
-                        <Label fx:id="goLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="111.0" layoutY="285.0" prefHeight="141.0" prefWidth="583.0" text="Start">
+                        <Label fx:id="readyStatusLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="111.0" layoutY="285.0" prefHeight="141.0" prefWidth="583.0" text="Start">
                            <font>
                               <Font size="96.0" />
                            </font>
