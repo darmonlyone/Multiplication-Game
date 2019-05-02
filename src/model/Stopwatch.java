@@ -1,11 +1,13 @@
-public class TimeStop {
+package model;
+
+public class Stopwatch {
 
 
     private long startTime;
     private long stopTime;
     private boolean isStart;
 
-    public TimeStop(){
+    public Stopwatch(){
         startTime = 0;
         stopTime = 0;
         isStart = false;

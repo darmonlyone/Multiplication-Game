@@ -1,9 +1,11 @@
+package model;
+
 import java.io.*;
 
-public class Score{
+public class ScoreReader {
     private String[] highScore;
 
-    public Score(){
+    public ScoreReader(){
         highScore = new String[11];
     }
 
@@ -14,7 +16,7 @@ public class Score{
         String score;
         int index = 0;
         while ((score = reader.readLine()) != null){
-            String[] score_split = score.split(":");
+            String[] score_split = score.split(": ");
             highScore[index] = score_split[1];
             index++;
         }
@@ -37,7 +39,7 @@ public class Score{
 
 
     public String getHighScore(int index) {
-        return highScore[index-1];
+        return highScore[index];
     }
 
     public String[] getHighScoreList(){

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1124.0" stylesheets="@components/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
       <GridPane layoutX="-6.0" layoutY="68.0" prefHeight="738.0" prefWidth="1136.0">
          <columnConstraints>
@@ -36,7 +36,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table2_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table2_score" layoutX="38.0" layoutY="70.0" text="High model.ScoreReader : 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -55,7 +55,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table3_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table3_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -74,7 +74,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table4_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table4_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -93,7 +93,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table5_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table5_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -112,7 +112,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table6_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table6_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -131,7 +131,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table7_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table7_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -145,12 +145,12 @@
                               </Pane>
                               <Pane prefHeight="120.0" prefWidth="289.0" style="-fx-border-color: #E8E8E8;">
                                  <children>
-                                    <Label fx:id="table8_score" layoutX="36.0" layoutY="26.0" text="Table 8">
+                                    <Label layoutX="36.0" layoutY="26.0" text="Table 8">
                                        <font>
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table8_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -169,7 +169,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table9_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table9_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -188,7 +188,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table10_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table10_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -207,7 +207,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table11_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table11_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -226,7 +226,7 @@
                                           <Font name="Avenir Heavy" size="19.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="table12_score" layoutX="38.0" layoutY="70.0" text="High Score : 0" textFill="#000000ba">
+                                    <Label fx:id="table12_score" layoutX="38.0" layoutY="70.0" text="High Score: 0" textFill="#000000ba">
                                        <font>
                                           <Font size="19.0" />
                                        </font>
@@ -282,7 +282,7 @@
                   </Pane>
                </children>
             </FlowPane>
-            <FlowPane fx:id="ready_pane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <FlowPane fx:id="" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Pane fx:id="ready_pane" prefHeight="739.0" prefWidth="820.0" style="-fx-background-color: #f28d8d;">
                      <children>

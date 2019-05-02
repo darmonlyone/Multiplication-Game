@@ -1,3 +1,6 @@
+package controller;
+
+import controller.sub.ResultFlowPane;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -8,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import model.ScoreReader;
+import model.Stopwatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -162,9 +167,9 @@ public class GameController {
     private int playTime;
     private int failCount = 3;
     private ArrayList<ResultFlowPane> resultFlowPaneArrayList;
-    private TimeStop timeStop;
+    private Stopwatch stopwatch;
 
-    private Score score = new Score();
+    private ScoreReader scoreReader = new ScoreReader();
 
     private int multiplier;
     @FXML
@@ -173,7 +178,7 @@ public class GameController {
         playNumber = 1;
         random = new Random();
         ansList = new ArrayList<>();
-        timeStop = new TimeStop();
+        stopwatch = new Stopwatch();
         showHighScore();
         resultFlowPaneArrayList = new ArrayList<>();
     }
@@ -302,7 +307,7 @@ public class GameController {
                 setSelectAnswer(i,randAns);
             }
         }
-        timeStop.startTiming();
+        stopwatch.startTiming();
     }
 
     private void updateFail(){
@@ -364,11 +369,11 @@ public class GameController {
 
     private void showHighScore(){
         try {
-            score.readScore("src/highscore.txt");
+            scoreReader.readScore("src/highscore.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String[] highscore = score.getHighScoreList();
+        String[] highscore = scoreReader.getHighScoreList();
         table2_score.setText("High Score: "+ highscore[0]);
         table3_score.setText("High Score: "+ highscore[1]);
         table4_score.setText("High Score: "+ highscore[2]);
@@ -384,7 +389,7 @@ public class GameController {
 
     private void saveHighScore(){
         try {
-            score.writeScore("src/highscore.txt");
+            scoreReader.writeScore("src/highscore.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -392,9 +397,9 @@ public class GameController {
     }
 
     private boolean checkHighScore(){
-        playHighScore = Integer.parseInt(score.getHighScore(playNumber-2));
+        playHighScore = Integer.parseInt(scoreReader.getHighScore(playNumber-2));
         if (playScore > playHighScore){
-            score.setHighScore(playNumber-2,playScore);
+            scoreReader.setHighScore(playNumber-2,playScore);
             return true;
         }
         return false;
@@ -406,14 +411,14 @@ public class GameController {
         setResult();
         saveHighScore();
         showHighScore();
-        timeStop.stopTiming();
+        stopwatch.stopTiming();
         result_table.getChildren().clear();
         result_table.getChildren().addAll(resultFlowPaneArrayList);
     }
 
     private void updateResultTable(int multiplier, int question){
-        timeStop.stopTiming();
-        resultFlowPaneArrayList.add(new ResultFlowPane(resultFlowPaneArrayList.size()+1,playNumber,multiplier,question,timeStop.getUsedTime()));
+        stopwatch.stopTiming();
+        resultFlowPaneArrayList.add(new ResultFlowPane(resultFlowPaneArrayList.size()+1,playNumber,multiplier,question, stopwatch.getUsedTime()));
     }
 
 
