@@ -6,17 +6,20 @@ public class MultiplicationGame {
     private int failCount;
     private int failAmount;
     private int score;
-    private int maxMultiplier;
     private int answers;
+    private boolean gameOver;
     private Multiplication multiplication;
-    private Random random = new Random();
 
-    public MultiplicationGame(int failCount, int score, int maxMultiplier) {
+    public MultiplicationGame(int failCount, int score) {
         this.failAmount = failCount;
         this.failCount = this.failAmount;
         this.score = score;
-        this.maxMultiplier =  maxMultiplier;
         this.multiplication = new Multiplication();
+        gameOver = false;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
     public void setAnswers(int answers) {
@@ -61,11 +64,8 @@ public class MultiplicationGame {
         return score;
     }
 
-    public int getMaxMultiplier() {
-        return maxMultiplier;
-    }
 
-    public void randomMultiplier(){
-        multiplication.setMultiplier(random.nextInt(maxMultiplier) + 1);
+    public boolean isGameOver(){
+        return failCount <= 0 || gameOver;
     }
 }

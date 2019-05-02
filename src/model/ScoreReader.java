@@ -1,15 +1,18 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class ScoreReader {
     private String[] highScore;
+    private String url;
 
-    public ScoreReader(){
+    public ScoreReader(String url){
         highScore = new String[11];
+        this.url = url;
     }
 
-    public void readScore(String url) throws IOException {
+    public void readScore() throws IOException {
         File file = new File(url);
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -22,7 +25,7 @@ public class ScoreReader {
         }
     }
 
-    public void writeScore(String url) throws IOException {
+    public void writeScore(ArrayList<Integer> scoreList) throws IOException {
         File file = new File(url);
         if(file.exists()) {
             file.delete();
@@ -30,24 +33,14 @@ public class ScoreReader {
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-        for (int i = 1;i <= highScore.length;i++){
-            writer.write(String.format("Table_%d: %s\n",i+1,highScore[i-1]));
+        for (int i = 1;i <= scoreList.size();i++){
+            writer.write(String.format("Table_%d: %s\n",i+1,scoreList.get(i-1)));
         }
         writer.close();
     }
 
-
-
-    public String getHighScore(int index) {
-        return highScore[index];
-    }
-
     public String[] getHighScoreList(){
         return highScore;
-    }
-
-    public void setHighScore(int index,int score){
-        highScore[index] = score+"";
     }
 }
 
