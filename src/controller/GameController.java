@@ -9,9 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import model.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameController {
 
@@ -88,9 +86,6 @@ public class GameController {
     private FlowPane gameplay_pane;
 
     @FXML
-    private Pane question_box;
-
-    @FXML
     private Label question_text;
 
     @FXML
@@ -112,9 +107,6 @@ public class GameController {
     private Button answer4;
 
     @FXML
-    private Button giveup;
-
-    @FXML
     private FlowPane result_pane;
 
     @FXML
@@ -125,12 +117,6 @@ public class GameController {
 
     @FXML
     private Label table_play;
-
-    @FXML
-    private Button newgame_btn;
-
-    @FXML
-    private Button tryagain_btn;
 
     @FXML
     private Label readyCountLabel;
@@ -150,31 +136,27 @@ public class GameController {
     @FXML
     private FlowPane result_table;
 
-    private int playHighScore;
-    private Random random;
-    private ArrayList<Integer> ansList;
-
+    private MultiplicationApp multiplicationApp;
     private MultiplicationGame multiplicationGame;
     private Multiplication multiplication;
     private Timer playTimer;
     private Timer readyTimer;
     private ArrayList<ResultFlowPane> resultFlowPaneArrayList;
     private Stopwatch stopwatch;
-    private ScoreReader scoreReader = new ScoreReader();
 
 
     @FXML
     private void initialize(){
-        changeScreen(1);
         playTimer = new Timer(60);
-        random = new Random();
-        multiplicationGame = new MultiplicationGame(3,0, 12);
+        multiplicationGame = new MultiplicationGame(3,0);
         multiplication = multiplicationGame.getMultiplication();
-
-        ansList = new ArrayList<>();
+        multiplicationApp = new MultiplicationApp(12, "src/highscore.txt");
+        multiplicationApp.setMultiplicationGame(multiplicationGame);
         stopwatch = new Stopwatch();
-        showHighScore();
         resultFlowPaneArrayList = new ArrayList<>();
+
+        changeScreen(1);
+        showHighScore();
     }
 
     private void changeScreen(int paneNo){
@@ -205,15 +187,10 @@ public class GameController {
         }
     }
 
-    private int makeMultiplication(){
-        multiplicationGame.randomMultiplier();
-        if (ansList.size() >= (multiplicationGame.getMaxMultiplier() * 2))
-            multiplication.setMultiplier(multiplication.getMultiplier() + (multiplicationGame.getMaxMultiplier()*2));
-        else if (ansList.size() >= multiplicationGame.getMaxMultiplier())
-            multiplication.setMultiplier(multiplication.getMultiplier() + (multiplicationGame.getMaxMultiplier()));
-
-        return multiplication.getAnswer();
+    private void setQuestionLabel(){
+        question_text.setText(String.format("%d x %d = ??",multiplication.getNumber(),multiplication.getMultiplier()));
     }
+
 
     private void readyStep(int playNumber){
         readyTimer = new Timer(3);
@@ -224,9 +201,9 @@ public class GameController {
         readyStatusLabel.setVisible(false);
         readyCountLabel.setText("4");
         readyStatusLabel.setText("Start");
-
-        multiplicationGame.resetFailCount();
         fail_mark.setText("X X X");
+
+        multiplicationApp.resetGame();
 
         readyTimer.startTimer(e->{
             int countdown = readyTimer.countDown() + 1;
@@ -238,7 +215,7 @@ public class GameController {
             }
             if (countdown == -1){
                 changeScreen(2);
-                startPlay(playNumber);
+                setupPlay(playNumber);
                 readyTimer.stopTimer();
                 playTimer.startTimer(event -> {
                     current_time.setText("Time: "+ (playTimer.countDown()) + " sec");
@@ -254,42 +231,16 @@ public class GameController {
         });
     }
 
-    private void startPlay(int playNumber){
+    private void setupPlay(int playNumber){
+        multiplicationApp.startPlay(playNumber);
 
-        multiplication.setNumber(playNumber);
+        int[] ansBox = multiplicationApp.getAns();
+        answer1.setText(Integer.toString(ansBox[0]));
+        answer2.setText(Integer.toString(ansBox[1]));
+        answer3 .setText(Integer.toString(ansBox[2]));
+        answer4.setText(Integer.toString(ansBox[3]));
 
-        int maxMulti = multiplicationGame.getMaxMultiplier();
-        int multiplier = multiplication.getMultiplier();
-        int number = multiplication.getNumber();
-        int answered = makeMultiplication();
-
-        while (ansList.contains(answered)){
-            if (ansList.size() >= multiplicationGame.getMaxMultiplier()*3)
-                ansList.clear();
-            answered = makeMultiplication();
-        }
-        question_text.setText(String.format("%d x %d = ??",multiplication.getNumber(),multiplication.getMultiplier()));
-
-        ansList.add(answered);
-        int randAnsPoint = random.nextInt(4);
-        ArrayList<Integer> randAnsList = new ArrayList<>();
-        for (int i = 0; i < 4 ; i++) {
-            int bound = number * (multiplier >= maxMulti * 2 ? maxMulti * 3 : multiplier > maxMulti ? maxMulti * 2 : maxMulti);
-            int randAns = random.nextInt(bound)+1;
-            if (number % 2 == 0 && randAns % 2 != 0)
-                randAns += 1;
-            while (randAnsList.contains(randAns) || randAns == answered){
-                randAns = random.nextInt(bound)+1;
-                if (number % 2 == 0 && randAns % 2 != 0)
-                    randAns += 1;
-            }
-            randAnsList.add(randAns);
-            if (i == randAnsPoint){
-                setSelectAnswer(i,answered);
-            }else {
-                setSelectAnswer(i,randAns);
-            }
-        }
+        setQuestionLabel();
         stopwatch.startTiming();
     }
 
@@ -305,17 +256,6 @@ public class GameController {
         }
     }
 
-    private void setSelectAnswer(int i, int answer){
-        if (i == 0)
-            answer1.setText(Integer.toString(answer));
-        if (i == 1)
-            answer2.setText(Integer.toString(answer));
-        if (i == 2)
-            answer3 .setText(Integer.toString(answer));
-        if (i == 3)
-            answer4.setText(Integer.toString(answer));
-    }
-
     private void updateScore(int score){
         current_score.setText("Score: " + score);
     }
@@ -323,7 +263,7 @@ public class GameController {
     private void resetGamePlay(){
         current_score.setText("Score: 0");
         multiplicationGame.setScore(0);
-        ansList.clear();
+        multiplicationApp.clearAnsList();
         resultFlowPaneArrayList.clear();
     }
 
@@ -344,55 +284,33 @@ public class GameController {
     private void setResult(){
         table_play.setText("Table "+ multiplication.getNumber());
         result_score.setText("Score: " + multiplicationGame.getScore());
-        if(checkHighScore())
+        if(multiplicationApp.checkHighScore())
             result_highscore.setText("High Score: " + multiplicationGame.getScore());
         else
-            result_highscore.setText("High Score: " + playHighScore);
+            result_highscore.setText("High Score: " + multiplicationApp.getPlayHighScore());
     }
 
     private void showHighScore(){
-        try {
-            scoreReader.readScore("src/highscore.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String[] highscore = scoreReader.getHighScoreList();
-        table2_score.setText("High Score: "+ highscore[0]);
-        table3_score.setText("High Score: "+ highscore[1]);
-        table4_score.setText("High Score: "+ highscore[2]);
-        table5_score.setText("High Score: "+ highscore[3]);
-        table6_score.setText("High Score: "+ highscore[4]);
-        table7_score.setText("High Score: "+ highscore[5]);
-        table8_score.setText("High Score: "+ highscore[6]);
-        table9_score.setText("High Score: "+ highscore[7]);
-        table10_score.setText("High Score: "+ highscore[8]);
-        table11_score.setText("High Score: "+ highscore[9]);
-        table12_score.setText("High Score: "+ highscore[10]);
-    }
 
-    private void saveHighScore(){
-        try {
-            scoreReader.writeScore("src/highscore.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private boolean checkHighScore(){
-        playHighScore = Integer.parseInt(scoreReader.getHighScore(multiplication.getNumber()-2));
-        if (multiplicationGame.getScore() > playHighScore){
-            scoreReader.setHighScore(multiplication.getNumber()-2,multiplicationGame.getScore());
-            return true;
-        }
-        return false;
+        ArrayList<Integer> highscore = multiplicationApp.getHighScoreList();
+        table2_score.setText("High Score: "+ highscore.get(0));
+        table3_score.setText("High Score: "+ highscore.get(1));
+        table4_score.setText("High Score: "+ highscore.get(2));
+        table5_score.setText("High Score: "+ highscore.get(3));
+        table6_score.setText("High Score: "+ highscore.get(4));
+        table7_score.setText("High Score: "+ highscore.get(5));
+        table8_score.setText("High Score: "+ highscore.get(6));
+        table9_score.setText("High Score: "+ highscore.get(7));
+        table10_score.setText("High Score: "+ highscore.get(8));
+        table11_score.setText("High Score: "+ highscore.get(9));
+        table12_score.setText("High Score: "+ highscore.get(10));
     }
 
     private void endGame(){
         changeScreen(3);
         playTimer.stopTimer();
         setResult();
-        saveHighScore();
+        multiplicationApp.saveHighScore();
         showHighScore();
         stopwatch.stopTiming();
         result_table.getChildren().clear();
@@ -412,7 +330,7 @@ public class GameController {
             updateScore(multiplicationGame.upScore());
         else
             updateFail();
-        startPlay(multiplication.getNumber());
+        setupPlay(multiplication.getNumber());
     }
 
     @FXML
@@ -422,7 +340,7 @@ public class GameController {
             updateScore(multiplicationGame.upScore());
         else
             updateFail();
-        startPlay(multiplication.getNumber());
+        setupPlay(multiplication.getNumber());
     }
 
     @FXML
@@ -432,7 +350,7 @@ public class GameController {
             updateScore(multiplicationGame.upScore());
         else
             updateFail();
-        startPlay(multiplication.getNumber());
+        setupPlay(multiplication.getNumber());
     }
 
     @FXML
@@ -442,7 +360,7 @@ public class GameController {
             updateScore(multiplicationGame.upScore());
         else
             updateFail();
-        startPlay(multiplication.getNumber());
+        setupPlay(multiplication.getNumber());
     }
 
     @FXML
