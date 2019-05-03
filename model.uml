@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model</OriginalElement>
+  <nodes>
+    <node x="580.0" y="560.0">model.MultiplicationApp</node>
+    <node x="366.00000000000006" y="192.0">model.MultiplicationGame</node>
+    <node x="890.0" y="703.5">controller.sub.ResultFlowPane</node>
+    <node x="705.5" y="236.0">model.MultiplicationScoreBoard</node>
+    <node x="1226.0" y="725.0">model.Stopwatch</node>
+    <node x="458.99999999999994" y="1156.0">controller.GameController</node>
+    <node x="710.5" y="0.0">model.ScoreReader</node>
+    <node x="0.0" y="725.0">model.Timer</node>
+    <node x="445.95982142857144" y="23.5">model.Multiplication</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.3053165586804689" x="1105.2196321794654" y="1245.1689058625395" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
