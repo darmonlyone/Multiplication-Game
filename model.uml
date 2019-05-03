@@ -3,25 +3,100 @@
   <ID>JAVA</ID>
   <OriginalElement>model</OriginalElement>
   <nodes>
-    <node x="580.0" y="560.0">model.MultiplicationApp</node>
-    <node x="366.00000000000006" y="192.0">model.MultiplicationGame</node>
-    <node x="890.0" y="703.5">controller.sub.ResultFlowPane</node>
-    <node x="705.5" y="236.0">model.MultiplicationScoreBoard</node>
-    <node x="1226.0" y="725.0">model.Stopwatch</node>
-    <node x="458.99999999999994" y="1156.0">controller.GameController</node>
-    <node x="710.5" y="0.0">model.ScoreReader</node>
-    <node x="0.0" y="725.0">model.Timer</node>
-    <node x="445.95982142857144" y="23.5">model.Multiplication</node>
+    <node x="10.5" y="190.0">model.MultiplicationGame</node>
+    <node x="182.0916666666667" y="556.0">model.MultiplicationApp</node>
+    <node x="440.0916666666667" y="699.5">controller.sub.ResultFlowPane</node>
+    <node x="286.925" y="234.0">model.MultiplicationScoreBoard</node>
+    <node x="347.5916666666667" y="1150.0">controller.GameController</node>
+    <node x="704.0916666666667" y="721.0">model.Stopwatch</node>
+    <node x="290.425" y="0.0">model.ScoreReader</node>
+    <node x="855.0916666666667" y="721.0">model.Timer</node>
+    <node x="65.13958333333329" y="23.5">model.Multiplication</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="0.3053165586804689" x="1105.2196321794654" y="1245.1689058625395" />
-  <SelectedNodes />
+  <edges>
+    <edge source="model.MultiplicationApp" target="model.MultiplicationGame">
+      <point x="-99.16666666666663" y="-257.0" />
+      <point x="201.92500000000007" y="536.0" />
+      <point x="164.875" y="536.0" />
+      <point x="30.875" y="158.0" />
+    </edge>
+    <edge source="model.MultiplicationScoreBoard" target="model.ScoreReader">
+      <point x="58.25" y="-114.0" />
+      <point x="461.675" y="170.0" />
+      <point x="459.925" y="170.0" />
+      <point x="56.5" y="70.0" />
+    </edge>
+    <edge source="controller.GameController" target="model.Stopwatch">
+      <point x="55.818181818181756" y="-883.0" />
+      <point x="556.9098484848485" y="1100.0" />
+      <point x="736.8416666666667" y="1100.0" />
+      <point x="-32.75" y="92.0" />
+    </edge>
+    <edge source="model.MultiplicationGame" target="model.Multiplication">
+      <point x="0.0" y="-158.0" />
+      <point x="134.0" y="170.0" />
+      <point x="128.1395833333333" y="170.0" />
+      <point x="0.0" y="46.5" />
+    </edge>
+    <edge source="controller.GameController" target="model.MultiplicationApp">
+      <point x="-27.909090909090878" y="-883.0" />
+      <point x="473.1825757575758" y="1090.0" />
+      <point x="360.5916666666667" y="1090.0" />
+      <point x="59.5" y="257.0" />
+    </edge>
+    <edge source="controller.GameController" target="model.MultiplicationGame">
+      <point x="-83.72727272727275" y="-883.0" />
+      <point x="417.36439393939395" y="1110.0" />
+      <point x="77.75" y="1110.0" />
+      <point x="77.75" y="536.0" />
+      <point x="103.125" y="536.0" />
+      <point x="-30.875" y="158.0" />
+    </edge>
+    <edge source="controller.GameController" target="model.Timer">
+      <point x="111.63636363636363" y="-883.0" />
+      <point x="612.7280303030303" y="1120.0" />
+      <point x="923.5916666666667" y="1120.0" />
+      <point x="-68.5" y="92.0" />
+    </edge>
+    <edge source="controller.GameController" target="model.Multiplication">
+      <point x="-139.54545454545456" y="-883.0" />
+      <point x="361.54621212121214" y="1130.0" />
+      <point x="0.0" y="1130.0" />
+      <point x="0.0" y="160.0" />
+      <point x="77.73958333333331" y="160.0" />
+      <point x="-50.39999999999998" y="46.5" />
+    </edge>
+    <edge source="model.MultiplicationApp" target="model.Multiplication">
+      <point x="-19.83333333333337" y="-257.0" />
+      <point x="281.2583333333333" y="536.0" />
+      <point x="268.0" y="536.0" />
+      <point x="268.0" y="160.0" />
+      <point x="178.53958333333327" y="160.0" />
+      <point x="50.39999999999998" y="46.5" />
+    </edge>
+    <edge source="controller.GameController" target="controller.sub.ResultFlowPane">
+      <point x="27.909090909090878" y="-883.0" />
+      <point x="529.0007575757576" y="1090.0" />
+      <point x="623.0916666666667" y="1090.0" />
+      <point x="61.0" y="113.5" />
+    </edge>
+    <edge source="model.MultiplicationApp" target="model.MultiplicationScoreBoard">
+      <point x="99.16666666666663" y="-257.0" />
+      <point x="400.2583333333333" y="536.0" />
+      <point x="481.09166666666675" y="536.0" />
+      <point x="77.66666666666674" y="114.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="2107.639055666039" y="2376.666666666665" />
+  <SelectedNodes>
+    <node>model.Multiplication</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
-    <Category>Properties</Category>
     <Category>Methods</Category>
+    <Category>Properties</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
